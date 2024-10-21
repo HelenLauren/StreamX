@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - StreamX</title>
+    <link rel="stylesheet" href="./styles.css/login.css">
+</head>
+<body>
+
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <input type="text" id="email" placeholder="Email" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            <button type="submit">Entrar</button>
+            <p class="error-message" id="errorMessage"></p>
+        </form>
+        <p>Não tem uma conta? <a href="#">Cadastre-se</a></p>
+    </div>
+
+    <script>
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevenir o envio padrão do formulário
+            
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const errorMessage = document.getElementById("errorMessage");
+            errorMessage.textContent = ''; // Limpar mensagem de erro
+            
+            // Regex para validar o email (contendo @ e .com)
+            const emailRegex = /^[^@]+@[^@]+\.[a-z]{2,}$/i;
+
+            // Senha de exemplo para comparação (pode ser adaptado para vir do banco de dados)
+            const validPassword = "Senha123"; 
+
+            // Validação do email
+            if (!emailRegex.test(email)) {
+                errorMessage.textContent = "Por favor, insira um email válido (exemplo: nome@dominio.com).";
+                return;
+            }
+
+            // Validação da senha
+            if (password !== validPassword) {
+                errorMessage.textContent = "Senha incorreta. Tente novamente.";
+                return;
+            }
+
+            // Login bem-sucedido, redirecionar para outra página
+            alert("Login bem-sucedido!");
+            window.location.href = "https://www.seusite.com/pagina-de-aluguel"; // Substitua pela URL desejada
+        });
+    </script>
+
+</body>
+</html>
