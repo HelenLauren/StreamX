@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Admin-AdicionarFilmes</title>
     <link rel="stylesheet" href="styles.css/add.filmes.css">
 </head>
 <body>
@@ -14,7 +14,7 @@
                 <ul>
                     <li><a href="#">Dashboard</a></li>
                     <li><a href="#">Clientes</a></li>
-                    <li><a href="#">Filmes</a></li>
+                    <li><a href="add.filmes.html">Filmes</a></li>
                     <li><a href="#">Atividades</a></li>
                     <li><a href="#">Aluguéis</a></li>
                     <li><a href="#">Eventos</a></li>
@@ -23,8 +23,7 @@
                 </ul>
             </nav>
         </aside>
-        
-        <section class="main-content">
+         <section class="main-content">
             <header>
                 <h1>Filmes</h1>
                 <button class="add-movie-btn" onclick="openPopup()">Adicionar Filme</button>
@@ -44,6 +43,45 @@
                 <!-- adicionar outros filmes depois-->
             </div>
         </section>
+        <script>
+
+            const salvar = async () => {
+                console.log('salvar');
+
+                var movieName = document.getElementById('movie-name').value;
+                var rentalPrice = document.getElementById('rental-price').value;
+                var premierYear = document.getElementById('premier-year');
+                var genre = document.getElementById('genre').value;
+                var genre2 = document.getElementById('genre2').value;
+                var ageClassification = document.getElementById('age-classification').value;
+
+                console.log(movieName);
+                console.log(rentalPrice);
+                console.log(premierYear);
+                console.log(genre);
+                console.log(genre2);
+                console.log(ageClassification);
+                var data = {
+                    movieName: movieName,
+                    rentalPrice: rentalPrice,
+                    premierYear: premierYear,
+                    genre: genre,
+                    genre2: genre2,
+                    ageClassification: ageClassification
+                }
+
+                console.log(JSON.stringify(data));
+                const response = await fetch(`http://localhost:3000/api/filmes`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+                const result = await response.json();
+                console.log(result);
+            }
+        </script>
 
         <div class="popup" id="addMoviePopup">
             <div class="popup-content">
@@ -56,7 +94,10 @@
                     <label for="rental-price">Preço Aluguel</label>
                     <input type="text" id="rental-price" placeholder="Preço">
 
-                     <label for="genre">Gênero 1</label>
+                    <label for="premier-year">Ano Lançamento</label>
+                    <input type="text" id="premier-year" placeholder="Ano Lancamento">
+
+                    <label for="genre">Gênero 1</label>
                     <select id="genre" placeholder="Gênero">
                         <option value="">Selecione um Genero</option>
                         <option value="Acao">Acao</option>
@@ -65,10 +106,9 @@
                         <option value="Drama"> Drama</option>
                         <option value="Fantasia"> Fantasia</option>
                         <option value="Ficcao Cientifica"> Ficcao Cientifica</option>
-                    </select>   
-                    
-                    <label for="genre">Gênero 2</label>
-                    <select id="genre" placeholder="Gênero">
+                    </select>
+                    <label for="genre2">Gênero 2</label>
+                    <select id="genre2" placeholder="Gênero">
                         <option value="">Selecione um Genero</option>
                         <option value="Acao">Acao</option>
                         <option value="Aventura"> Aventura</option>
@@ -76,7 +116,7 @@
                         <option value="Drama"> Drama</option>
                         <option value="Fantasia"> Fantasia</option>
                         <option value="Ficcao Cientifica"> Ficcao Cientifica</option>
-                    </select>   
+                    </select>
                     <label for="age-classification">Classificação Indicativa</label>
                     <select id="age-classification">
                         <option value="">Selecione uma classificação</option>
@@ -91,7 +131,7 @@
                     <label for="cover-image">Escolher arquivo</label>
                     <input type="file" id="cover-image">
 
-                    <button type="submit">Adicionar</button>
+                    <button onclick="salvar()" type="button">Adicionar</button>
                 </form>
             </div>
         </div>
@@ -108,3 +148,4 @@
     </script>
 </body>
 </html>
+
