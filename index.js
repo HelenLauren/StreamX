@@ -27,8 +27,8 @@ const router = express.Router();
 
 //endpoint para o login
 router.post('/api/login', (req, res) => {
-    var cadastro = req.body;
-    var sql = `select id, email from usuario where email = '${cliente.email}' and
+    var login = req.body;
+    var sql = `select id, email from cliente where email = '${cliente.email}' and
     senha = '${cliente.senha}' and status = 1 `;
     con.query(sql, function (err, result) {
         if (err) throw err;
@@ -47,17 +47,17 @@ router.post('/api/cadastro', (req, res) => {
     });
 });
 
-//endpoint para salvar um usuário
-router.post('/api/usuarios', (req, res) => {
-    var usuario = req.body;
+//endpoint para salvar um cliente
+router.post('/api/cliente', (req, res) => {
+    var cliente = req.body;
     var sql = '';
-    if (usuario.id) {
-        sql = `UPDATE usuario SET email = '${usuario.email}', 
-        senha = '${usuario.senha}', status = '${usuario.status ? 1 : 0}' 
-        WHERE id = ${usuario.id}`; 
+    if (cliente.id) {
+        sql = `UPDATE cliente SET email = '${cliente.email}', 
+        senha = '${cliente.senha}', status = '${cliente.status ? 1 : 0}' 
+        WHERE id = ${ciente.id}`; 
     } else {
-        sql = `INSERT INTO usuario (email, senha, status) VALUES 
-    ('${usuario.email}', '${usuario.senha}','${usuario.status ? 1 : 0}')`;
+        sql = `INSERT INTO cliente (email, senha) VALUES 
+    ('${cliente.email}', '${cliente.senha}','${cliente.status ? 1 : 0}')`;
     }
     con.query(sql, function (err, result) {
         if (err) throw err;
@@ -66,10 +66,10 @@ router.post('/api/usuarios', (req, res) => {
 });
 
 //endpoint para capturar um usuário por id
-router.get('/api/usuarios/:id', (req, res) => {
+router.get('/api/cliente/:id', (req, res) => {
     const id = req.param("id");
 
-    let sql = `SELECT u.id, u.email, u.status FROM usuario u WHERE u.id = ${id}`;
+    let sql = `SELECT c.id, c.email, c.nome FROM cliente c WHERE c.id = ${id}`;
     con.query(sql, function (err, result) {
         if (err) throw err;
         res.status(200).json(result[0]);
@@ -77,15 +77,15 @@ router.get('/api/usuarios/:id', (req, res) => {
 });
 
 //endpoint para excluir um usuário
-router.delete('/api/usuarios/:id', (req, res) => {
+router.delete('/api/cliente/:id', (req, res) => {
     const id = req.param("id");
 
-    var sql = `DELETE FROM usuario WHERE id = ${id} `;
+    var sql = `DELETE FROM cliente WHERE id = ${id} `;
     con.query(sql, function (err, result) {
         if (err) throw err;
     });
 
-    res.status(200).send(`usuario com id ${id} excluído`);
+    res.status(200).send(`usuário com id ${id} excluído`);
 });
 
 router.post('/api/filmes', (req, res) => {
