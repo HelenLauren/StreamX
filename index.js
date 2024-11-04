@@ -27,9 +27,9 @@ const router = express.Router();
 
 //endpoint para o login
 router.post('/api/login', (req, res) => {
-    var usuario = req.body;
-    var sql = `select id, email from usuario where email = '${usuario.email}' and
-    senha = '${usuario.senha}' and status = 1 `;
+    var cadastro = req.body;
+    var sql = `select id, email from usuario where email = '${cliente.email}' and
+    senha = '${cliente.senha}' and status = 1 `;
     con.query(sql, function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
@@ -37,27 +37,10 @@ router.post('/api/login', (req, res) => {
 });
 
 //endpoint para se registrar
-router.post('/api/registrese', (req, res) => {
-    var usuario = req.body;
-    var sql = `insert into usuario (email,codigo,status) values ('${usuario.email}',
-    '3543',0) `;
-    con.query(sql, function (err, result) {
-        if (err) throw err;
-        res.status(200).json(result);
-    });
-
-    //enviar o código por email
-});
-
-//endpoint para listar todos os usuários
-router.get('/api/usuarios', (req, res) => {
-    //cria a string the consulta no baco do tipo select
-    let sql = "SELECT u.id, u.email, u.status FROM usuario u";
-    //executando o comando sql com a função query
-    //nela passamos a string de consulta
-    //após a execução ele retorna o function que vai ter a variável err e result
-    //se deu algum erro a variável err terá o erro obtivo
-    //caso contrário o result terá dos dados do banco 
+router.post('/api/cadastro', (req, res) => {
+    var cliente = req.body;
+    var sql = `insert into cliente (nome, email, anoNasc, cep, cpf) values ('${cliente.name}','${cliente.email}',
+    '${cliente.birthYear}')'${cliente.cep}''${cliente.cpf}'`;
     con.query(sql, function (err, result) {
         if (err) throw err;
         res.status(200).json(result);
