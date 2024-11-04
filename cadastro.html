@@ -10,13 +10,62 @@
     <div class="login-container">
         <h1>Cadastro</h1>
         <form action="submit_cadastro.html" method="POST">
-            <input type="text" placeholder="Nome Completo" required>
-            <input type="email" placeholder="Email" required>
-            <input type="password" placeholder="Senha" required>
-            <input type="password" placeholder="Confirme a Senha" required>
+            <input id="name" type="text" placeholder="Nome Completo" required>
+            <input id="email" type="email" placeholder="Email" required>
+            <input id="birth-year" type="number" placeholder="Ano de Nascimento" required>
+            <input id="cep" type="text" placeholder="CEP" required>
+            <input id="cpf" type="text" placeholder="CPF" required>
+            <input id="phone" type="tel" placeholder="Telefone" required>
+            <input id="password" type="password" placeholder="Senha" required>
+            <input id="confirm-password" type="password" placeholder="Confirme a Senha" required>
+
             <button type="submit">Cadastrar</button>
         </form>
         <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
     </div>
+    <script>
+        const salvar = async () => {
+                console.log('salvar');
+
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var birthYear = document.getElementById('birth-year').value;
+                var cep = document.getElementById('cep').value;
+                var cpf = document.getElementById('cpf').value;
+                var phone = document.getElementById('phone').value;
+                var password = document.getElementById('password').value;
+                var confirmPassword = document.getElementById('confirm-password').value;
+
+                console.log(name);
+                console.log(email);
+                console.log(birthYear);
+                console.log(cep);
+                console.log(cpf);
+                console.log(phone);
+                console.log(password);
+                console.log(confirmPassword);
+                var data = {
+                    name: name,
+                    email: email,
+                    birthYear: birthYear,
+                    cep: cep,
+                    cpf: cpf,
+                    phone: phone,
+                    password: password,
+                    confirmPassword: confirmPassword
+                }
+
+                console.log(JSON.stringify(data));
+                const response = await fetch(`http://localhost:3000/api/cadastro`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(data),
+                });
+                const result = await response.json();
+                console.log(result);
+            }
+    </script>
 </body>
 </html>
