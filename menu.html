@@ -7,38 +7,38 @@
     <link rel="stylesheet" href="../styles.css/menu.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <header>
+   <header>
         <div class="navbar">
             <div class="logo">
                 <img src="../images/logoStreamX.png" alt="Logo da StreamX">
             </div>
             <nav>
                 <ul>
-                    <li><a href="menu.html">Início</a></li>
+                    <li><a href="./menu.html">Início</a></li>
                     <li><a href="#">Filmes</a></li>
                     <li><a href="#">Séries</a></li>
-                    <li><a href="#">Categorias</a></li>
+                    <li>
+                        <div class="dropdown">
+                            <button class="dropbtn">Gêneros</button>
+                            <div class="dropdown-content">
+                                <a href="./filmesAcao.html">Ação</a>
+                                <a href="#">Animacao</a>
+                                <a href="#">Aventura</a>
+                                <a href="#">Comédia</a>
+                                <a href="#">Drama</a>
+                                <a href="#">Ficcao Científica</a>
+                                <a href="#">Infantil</a>
+                                <a href="#">Mistério</a>
+                                <a href="#">Romance</a>
+                                <a href="#">Terror</a>
+                                <a href="#">Suspense</a>
+                            </div>
+                        </div>
+                    </li>
                 </ul>
             </nav>
-            <div class="dropdown">
-                <button class="dropbtn">Gêneros</button>
-                <div class="dropdown-content">
-                    <a href="#">Ação</a>
-                    <a href="#">Animacao</a>
-                    <a href="#">Aventura</a>
-                    <a href="#">Comédia</a>
-                    <a href="#">Drama</a>
-                    <a href="#">Ficcao Científica</a>
-                    <a href="#">Infantil</a>
-                    <a href="#">Mistério</a>
-                    <a href="#">Romance</a>
-                    <a href="#">Terror</a>
-                    <a href="#">Suspense</a>
-                </div>
-            </div>
-            <div class="login" id="login-button">
-                <a href="../html/login.html">Entrar</a>
+            <div class="user-profile">
+                <a href="#">Entrar</a>
             </div>
         </div>
     </header>
